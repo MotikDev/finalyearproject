@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Chats extends Migration
+class CreateChatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,8 @@ class Chats extends Migration
             $table->string('Message');
             $table->string('senderID');
             $table->string('ReceiverID');
-            $table->string('renderName');
+            $table->string('connection_chat_id');
+            $table->string('senderName');
             $table->string('receiverName');
             $table->string('SenderPicture');
             $table->string('ReceiverPicture');

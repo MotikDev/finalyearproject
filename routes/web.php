@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/myapi/testing', function(){
+    return 'Working';
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,3 +24,22 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/testingartisan', function(){
+   try{
+    // \Artisan::call('storage:link');
+    // sleep(2);
+    // \Artisan::call('migrate');
+    \Artisan::call('config:clear');
+    sleep(2);
+    \Artisan::call('cache:clear');
+    sleep(2);
+    \Artisan::call('route:clear');
+    sleep(2);
+    \Artisan::call('view:clear');
+       echo "Artisan commands was successful.";
+   } catch (Exception $e) {
+       echo 'Result: '.$e;
+   }
+});

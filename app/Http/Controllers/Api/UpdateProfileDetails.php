@@ -81,9 +81,10 @@ class UpdateProfileDetails extends Controller
             $request['spouseAge']? $mate->mateAge = $request['spouseAge'] : '';
             $request['spouseMaritalStatus']? $mate->mateMaritalStatus = $request['spouseMaritalStatus'] : '';
             $request['spouseJobStatus']? $mate->mateQualification = $request['spouseJobStatus'] : '';
-            $request['spouseLocation']? $mate->mateEmploymentStatus = $request['spouseLocation'] : '';
-            $request['spouseSOR']? $mate->mateLocation = $request['spouseSOR'] : '';
-            $request['spouseQualification']? $mate->mateStatOfOrigin = $request['spouseQualification'] : '';
+            $request['spouseJobStatus']? $mate->mateEmploymentStatus = $request['spouseJobStatus'] : '';
+            $request['spouseLocation']? $mate->mateLocation = $request['spouseLocation'] : '';
+            $request['spouseSOR']? $mate->mateStatOfOrigin = $request['spouseSOR'] : '';
+            $request['spouseQualification']? $mate->mateQualification = $request['spouseQualification'] : '';
             $mate->save();
 
             $mateDetails = User::find(Auth::user()->id);

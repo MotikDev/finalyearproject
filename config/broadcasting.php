@@ -37,10 +37,16 @@ return [
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
-                'useTLS' => false,
-                'host' => 'cu.motikdev.com.ng',
-                'port' => 6001,
-                'scheme' => 'http',
+                'useTLS' => true,
+                // 'host' => '127.0.0.1',
+                // // 'host' => '192.168.10.10',
+                // // 'host' => 'c941688f4dc3.eu.ngrok.io',
+                // 'port' => 6001,
+                // 'scheme' => 'https',
+                // 'curl_options' => [
+                //     CURLOPT_SSL_VERIFYHOST => 0,
+                //     CURLOPT_SSL_VERIFYPEER => 0,
+                // ]
             ],
         ],
 

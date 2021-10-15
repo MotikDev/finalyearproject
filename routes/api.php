@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/myapi/login', 'Api\LoginController@login');
 Route::post('/myapi/register', 'Api\RegisterController@register');
 Route::middleware('auth:api')->post('/myapi/updateprofile', 'Api\UpdateProfileDetails@updateP');
+Route::middleware('auth:api')->post('/myapi/attachmentanswers', 'Api\OppositeController@attachedStyle');
 Route::middleware('auth:api')->post('/myapi/checkprofile', 'Api\OppositeController@checkSearchProfile');
 
 
@@ -32,3 +33,10 @@ Route::middleware('auth:api')->post('/myapi/moreprofiledetails', 'Api\OppositeCo
 Route::middleware('auth:api')->post('/myapi/rejectrequest', 'Api\OppositeController@rejectedRequest');
 Route::middleware('auth:api')->post('/myapi/connectme', 'Api\OppositeController@connectUsers');
 
+Route::middleware('auth:api')->get('/myapi/loadspouse', 'Api\OppositeController@loadSpouseDetails');
+Route::middleware('auth:api')->post('/myapi/disconnectme', 'Api\OppositeController@disconnectMyAccount');
+
+
+
+Route::middleware('auth:api')->post('/myapi/sendchatmessage', 'Api\OppositeController@saveMessage');
+Route::middleware('auth:api')->get('/myapi/allchats', 'Api\OppositeController@getMessages');

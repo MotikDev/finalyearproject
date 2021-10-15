@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Pusher\Pusher;
 
 class LoginController extends Controller
 {
@@ -46,48 +47,36 @@ class LoginController extends Controller
             return response()->json(['user' => Auth::user(), 'access_token' => $accessToken, 'mate_result' => $searchResult]);
         }
 
-
+$partnerid = Auth::user()->connection_id;
+$partner = User::find($partnerid);
 
         $accessToken = Auth::user()->createToken('authToken')->accessToken;
 
-        return response()->json(['user' => Auth::user(), 'access_token' => $accessToken]);
+        return response()->json(['user' => Auth::user(), 'access_token' => $accessToken, 'partner' => $partner]);
         // return response()->json(['user' => Auth::user(), 'access_token' => $accessToken, 'status' => 'unconnected']);
     }
 
-    public function register (Request $request){
-        $register = $request->validate([
-            'firstName' => 'required|string',
-            'lastName' => 'required|string',
-            'email' => 'required|string',
-            'password' => 'required|string',
-            'sex' => 'required|string',
-            'DOB' => 'required|string',
-            'validID' => 'required|string',
-            'wofbiCert' => 'required|string',
-        ]);
+    // public function privateAuth (Request $request){
+    //     $pusher = new Pusher(
+    //         config('broadcasting.connections.pusher.key'),
+    //         config('broadcasting.connections.pusher.secret'),
+    //         config('broadcasting.connections.pusher.app_id'),
+    //         // config('broadcasting.connections.pusher.options')
 
-        $newUser = new User();
+    //         // env('PUSHER_APP_KEY'),
+    //         // env('PUSHER_APP_SECRET'),
+    //         // env('PUSHER_APP_ID'),
+    //     );
 
-        $newUser->name = $request['firstName'].$request['lastName'];
-        $newUser->sex = $request['sex'];
-        $newUser->DOB = $request['DOB'];
-        $newUser->ID_Card = $request['validID'];
-        $newUser->WOFBI_Cert = $request['wofbiCert'];
-        $newUser->email = $request['email'];
-        $newUser->password = Hash::make($request['password']);
-        $newUser->save();
+    //     return $pusher->socket_auth($request->channel_name, $request->socket_id);
+    // }
 
-        $accessToken = Auth::user()->createToken('authToken')->accessToken;
-
-        return response()->json(['user' => Auth::user(), 'access_token' => $accessToken, 'status' => 'unconnected']);
-    }
-
-    public function logout(Request $request)
-    {
-        // $this->guard()->logout();
-        // $request->session()->invalidate();
-        // $request->session()->regenerateToken();
-        // return $this->loggedOut($request) ?: redirect('/');
-    }
+    // public function logout(Request $request)
+    // {
+    //     // $this->guard()->logout();
+    //     // $request->session()->invalidate();
+    //     // $request->session()->regenerateToken();
+    //     // return $this->loggedOut($request) ?: redirect('/');
+    // }
     
 }

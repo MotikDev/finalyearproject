@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewChat implements ShouldBroadcast
+class Chatting implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,12 +19,12 @@ class NewChat implements ShouldBroadcast
      *
      * @return void
      */
-    public $message;
+    public $currentChat;
 
-    public function __construct($message)
+    public function __construct($currentChat)
     {
         //
-        $this->message = $message;
+        $this->currentChat = $currentChat;
     }
 
     /**
@@ -34,12 +34,12 @@ class NewChat implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('appChat');
-        // return new PrivateChannel('appChat');
+        return new PrivateChannel('privatechat'.$this->currentChat->connection_chat_id);
     }
 
-    public function broadcastAs()
-    {
-        return 'NewChat';
-    }
+    // public function broadcastAs()
+    // {
+    //     return 'Chatting';
+    // }
+
 }

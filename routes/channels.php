@@ -28,3 +28,13 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 //         return array('name' => $user->name);
 //     }
 // });
+
+
+// Broadcast::channel('user.{userId}', 'Api\ChatController@sendChat');
+
+Broadcast::channel('privatechat{chatId}', function ($user, $chatId) {
+    return (int) $user->connection_chat_id === (int) $chatId;
+}, ['guards' => ['api']]);
+// Broadcast::channel('privatechat.{chatId}', function ($user, $chatId) {
+//     return $user->connection_chat_id === $chatId;
+// }, ['guards' => ['auth:api']]);

@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('profile_Pic');
             $table->string('connection_status');
             $table->integer('connection_id')->nullable();
+            $table->integer('connection_chat_id')->nullable();
+            $table->string('attachment_style')->nullable();
+            $table->string('questions_asked')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
